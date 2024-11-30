@@ -9,6 +9,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import pages.AccountsPage;
+import pages.HomePage;
+import pages.LoginPage;
 import pages.NewAccountModal;
 import tests.TestListener;
 import utils.AllureUtils;
@@ -21,6 +24,9 @@ public class BaseTest {
 
     protected WebDriver driver;
     protected NewAccountModal newAccountModal;
+    protected LoginPage loginPage;
+    protected HomePage homePage;
+    protected AccountsPage accountsPage;
 
 
     @Parameters({"browser"})
@@ -41,6 +47,9 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         newAccountModal = new NewAccountModal(driver);
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
+        accountsPage = new AccountsPage(driver);
 
     }
 
