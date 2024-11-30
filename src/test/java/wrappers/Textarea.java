@@ -18,5 +18,4 @@ public class Textarea {
         driver.findElement(By.xpath(String.format("//label[text()='%s']//ancestor::lightning-textarea//textarea", label)))
                 .sendKeys(text);
     }
-
 }

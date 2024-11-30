@@ -9,14 +9,13 @@ public class Input {
     WebDriver driver;
     String label;
 
-    public Input(WebDriver driver, String label){
-        this.driver=driver;
-        this.label=label;
+    public Input(WebDriver driver, String label) {
+        this.driver = driver;
+        this.label = label;
     }
 
-    public void write(String text){
+    public void write(String text) {
         driver.findElement(By.xpath(String.format("//label[text()='%s']//ancestor::lightning-input//input", label)))
                 .sendKeys(text);
     }
-
 }

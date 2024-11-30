@@ -21,5 +21,4 @@ public class Picklist {
         driver.findElement(By.xpath(String.format(pickListPattern + "//lightning-base-combobox-item//span[text()='%s']",
                 label, option))).click();
     }
-
 }

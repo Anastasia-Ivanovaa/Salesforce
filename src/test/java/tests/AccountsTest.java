@@ -1,22 +1,21 @@
 package tests;
 
-import org.openqa.selenium.By;
+
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
 public class AccountsTest extends BaseTest {
 
-    @Test
+    @Test(testName = "Create a new account", description = "Check that a new account can be created")
+    @Description("Create a new account with valid data")
     public void checkCreateAccount() {
-        driver.get("https://tms9-dev-ed.develop.my.salesforce.com");
-        driver.findElement(By.id("username")).sendKeys("tborodich@tms.sandbox");
-        driver.findElement(By.id("password")).sendKeys("Password001");
-        driver.findElement(By.id("Login")).click();
-        driver.get("https://tms9-dev-ed.develop.lightning.force.com/lightning/o/Account/new");
-        driver.findElement(By.xpath("//div[@title ='New']")).click();
-        newAccountModal.createAccount("TMS", "123456", "147852", "Belskogo", "Warm");
-
-        driver.findElement(By.xpath("//*[@name='Name']")).sendKeys("TeachMeSkills");
-        driver.findElement(By.xpath("//*[@name='SaveEdit']")).click();
+        loginPage.open();
+        loginPage.login("tborodich@tms.sandbox", "Password001");
+        homePage.open();
+        homePage.selectMenuOption("Accounts");
+        accountsPage.clickOnActionButton("New");
+        newAccountModal.createAccount("Test 4", "123-44-55", "23444", "Street1", "Warm");
+        newAccountModal.clickButton("Save");
     }
 }
