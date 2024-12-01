@@ -17,10 +17,6 @@ public class HomePage extends BasePage {
         driver.get("https://tms9-dev-ed.develop.lightning.force.com/lightning/page/home");
     }
 
-//    public void openHamburgerMenu(){
-//        driver.findElement(By.xpath("//div[@title ='New']")).click();
-//    }
-
     @Step("Select option {optionName} in the menu bar")
     public void selectMenuOption(String optionName) {
         By setOption = By.xpath(String.format(MENU_OPTION_PATTERN, optionName));

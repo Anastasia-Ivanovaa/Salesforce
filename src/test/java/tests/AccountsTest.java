@@ -15,7 +15,14 @@ public class AccountsTest extends BaseTest {
         homePage.open();
         homePage.selectMenuOption("Accounts");
         accountsPage.clickOnActionButton("New");
-        newAccountModal.createAccount("Test 4", "123-44-55", "23444", "Street1", "Warm");
+        newAccountModal.createAccount(
+                "Test 8", "Hot", "23444", "14-85-555", "147852",
+                "test.com", "account.com", "ACNT", "Other", "Public",
+                "Banking", "10", "1000", "2525", "Street 5th",
+                "Connecticut", "New York", "06001", "USA", "Street 21st",
+                "Birmingham", "Alabama", "35005", "USA",
+                "Medium", "Gold", "01.12.2024", "369852KL",
+                "50", "No", "Yes", "New test account");
         newAccountModal.clickButton("Save");
     }
 }
