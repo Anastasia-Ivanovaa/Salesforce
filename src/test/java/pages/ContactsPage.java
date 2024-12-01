@@ -4,11 +4,11 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AccountsPage extends BasePage {
+public class ContactsPage extends BasePage{
+    private String ACTION_BUTTON_PATTERN =
+            "//lightning-button//ancestor::runtime_pipeline_inspector-actions-button-group//button[text()='%s']";
 
-    private String ACTION_BUTTON_PATTERN = "//div[@title='%s']";
-
-    public AccountsPage(WebDriver driver) {
+    public ContactsPage(WebDriver driver) {
         super(driver);
     }
 

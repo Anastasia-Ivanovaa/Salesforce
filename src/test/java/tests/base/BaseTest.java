@@ -9,10 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.AccountsPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.NewAccountModal;
+import pages.*;
 import tests.TestListener;
 import utils.AllureUtils;
 
@@ -27,6 +24,8 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected HomePage homePage;
     protected AccountsPage accountsPage;
+    protected ContactsPage contactsPage;
+    protected NewContactModal newContactModal;
 
 
     @Parameters({"browser"})
@@ -50,7 +49,8 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         accountsPage = new AccountsPage(driver);
-
+        contactsPage = new ContactsPage(driver);
+        newContactModal = new NewContactModal(driver);
     }
 
     @AfterMethod(alwaysRun = true, description = "Close browser")
