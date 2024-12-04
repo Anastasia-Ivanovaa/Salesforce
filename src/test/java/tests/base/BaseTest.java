@@ -10,6 +10,9 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.*;
+import steps.AccountStep;
+import steps.ContactStep;
+import steps.LoginStep;
 import tests.TestListener;
 import utils.AllureUtils;
 
@@ -20,12 +23,15 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected NewAccountModal newAccountModal;
     protected LoginPage loginPage;
-    protected HomePage homePage;
+    protected LoginStep loginStep;
+    protected AccountStep accountStep;
+    protected ContactStep contactStep;
+    // protected HomePage homePage;
     protected AccountsPage accountsPage;
+//    protected NewAccountModal newAccountModal;
     protected ContactsPage contactsPage;
-    protected NewContactModal newContactModal;
+//    protected NewContactModal newContactModal;
 
 
     @Parameters({"browser"})
@@ -45,12 +51,15 @@ public class BaseTest {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        newAccountModal = new NewAccountModal(driver);
         loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
+        accountStep = new AccountStep(driver);
+        contactStep = new ContactStep(driver);
+        loginStep = new LoginStep(driver);
+//        newAccountModal = new NewAccountModal(driver);
+//        homePage = new HomePage(driver);
         accountsPage = new AccountsPage(driver);
-        contactsPage = new ContactsPage(driver);
-        newContactModal = new NewContactModal(driver);
+//        contactsPage = new ContactsPage(driver);
+//        newContactModal = new NewContactModal(driver);
     }
 
     @AfterMethod(alwaysRun = true, description = "Close browser")

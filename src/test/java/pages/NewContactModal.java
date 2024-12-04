@@ -1,8 +1,10 @@
 package pages;
 
+import dto.Contact;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import wrappers.Input;
 import wrappers.Picklist;
 import wrappers.Textarea;
@@ -15,50 +17,60 @@ public class NewContactModal extends BasePage{
         super(driver);
     }
 
+    @Override
+    public NewContactModal isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//lightning-button/button[text()='New']")));
+        return this;
+    }
+
+    @Override
+    public NewContactModal open() {
+        driver.get("https://tms9-dev-ed.develop.lightning.force.com/lightning/o/Contact/new");
+        return this;
+    }
+
+
     @Step("Fill New Contact form with valid data")
-    public void createContact(String phone, String homePhone, String salutationOption, String firstName, String lastName,
-                              String mobile, String title, String otherPhone, String department, String fax,
-                              String birthdate, String email, String assistant, String leadSourceOption, String asstPhone,
-                              String mailingStreet, String mailingCity, String mailingState, String mailingZip,
-                              String mailingCountry, String otherStreet, String otherCity, String otherState,
-                              String otherZip, String otherCountry, String languages, String levelOption, String description){
+    public NewContactModal createContact(Contact contact){
         //Contact Information
-        new Input(driver, "Phone").write(phone);
-        new Input(driver, "Home Phone").write(homePhone);
-        new Picklist(driver,"Salutation").select(salutationOption);
-        new Input(driver, "First Name").write(firstName);
-        new Input(driver, "Last Name").write(lastName);
-        new Input(driver, "Mobile").write(mobile);
-        new Input(driver, "Title").write(title);
-        new Input(driver, "Other Phone").write(otherPhone);
-        new Input(driver, "Department").write(department);
-        new Input(driver, "Fax").write(fax);
-        new Input(driver, "Birthdate").write(birthdate);
-        new Input(driver, "Email").write(email);
-        new Input(driver, "Assistant").write(assistant);
-        new Picklist(driver,"Lead Source").select(leadSourceOption);
-        new Input(driver, "Asst. Phone").write(asstPhone);
+        new Input(driver, "Phone").write(contact.getPhone());
+        new Input(driver, "Home Phone").write(contact.getHomePhone());
+        new Picklist(driver,"Salutation").select(contact.getSalutationOption());
+        new Input(driver, "First Name").write(contact.getFirstName());
+        new Input(driver, "Last Name").write(contact.getLastName());
+        new Input(driver, "Mobile").write(contact.getMobile());
+        new Input(driver, "Title").write(contact.getTitle());
+        new Input(driver, "Other Phone").write(contact.getOtherPhone());
+        new Input(driver, "Department").write(contact.getDepartment());
+        new Input(driver, "Fax").write(contact.getFax());
+        new Input(driver, "Birthdate").write(contact.getBirthdate());
+        new Input(driver, "Email").write(contact.getEmail());
+        new Input(driver, "Assistant").write(contact.getAssistant());
+        new Picklist(driver,"Lead Source").select(contact.getLeadSourceOption());
+        new Input(driver, "Asst. Phone").write(contact.getAsstPhone());
         //Address Information
-        new Textarea(driver, "Mailing Street").write(mailingStreet);
-        new Input(driver, "Mailing City").write(mailingCity);
-        new Input(driver, "Mailing State/Province").write(mailingState);
-        new Input(driver, "Mailing Zip/Postal Code").write(mailingZip);
-        new Input(driver, "Mailing Country").write(mailingCountry);
-        new Textarea(driver, "Other Street").write(otherStreet);
-        new Input(driver, "Other City").write(otherCity);
-        new Input(driver, "Other State/Province").write(otherState);
-        new Input(driver, "Other Zip/Postal Code").write(otherZip);
-        new Input(driver, "Other Country").write(otherCountry);
+        new Textarea(driver, "Mailing Street").write(contact.getMailingStreet());
+        new Input(driver, "Mailing City").write(contact.getMailingCity());
+        new Input(driver, "Mailing State/Province").write(contact.getMailingState());
+        new Input(driver, "Mailing Zip/Postal Code").write(contact.getMailingZip());
+        new Input(driver, "Mailing Country").write(contact.getMailingCountry());
+        new Textarea(driver, "Other Street").write(contact.getOtherStreet());
+        new Input(driver, "Other City").write(contact.getOtherCity());
+        new Input(driver, "Other State/Province").write(contact.getOtherState());
+        new Input(driver, "Other Zip/Postal Code").write(contact.getOtherZip());
+        new Input(driver, "Other Country").write(contact.getOtherCountry());
         //Additional Information
-        new Input(driver, "Languages").write(languages);
-        new Picklist(driver,"Level").select(levelOption);
+        new Input(driver, "Languages").write(contact.getLanguages());
+        new Picklist(driver,"Level").select(contact.getLevelOption());
         //Description Information
-        new Textarea(driver, "Description").write(description);
+        new Textarea(driver, "Description").write(contact.getDescription());
+        return this;
     }
 
     @Step("Click on {buttonName} button")
-    public void clickButton(String buttonName) {
+    public ContactsPage clickButton(String buttonName) {
         By button = By.xpath(String.format(BUTTON_PATTERN, buttonName));
         driver.findElement(button).click();
+        return new ContactsPage(driver);
     }
 }

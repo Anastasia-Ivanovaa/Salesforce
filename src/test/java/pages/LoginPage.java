@@ -15,16 +15,23 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("Open Login page")
-    public void open() {
-        driver.get("https://tms9-dev-ed.develop.my.salesforce.com/");
+    @Override
+    public LoginPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        return this;
     }
 
-    @Step("Login into app with valid data - username:{userName} password:{password}")
-    public void login(String userName, String password) {
+    @Step("Open Login page")
+    public LoginPage open() {
+        driver.get("https://tms9-dev-ed.develop.my.salesforce.com/");
+        return this;
+    }
+
+    @Step("Login into app - username:{userName} password:{password}")
+    public HomePage login(String userName, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(userName);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@alt='User']//ancestor::button[@type='button']")));
+        return new HomePage(driver);
     }
 }
