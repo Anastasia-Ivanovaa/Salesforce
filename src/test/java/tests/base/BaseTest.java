@@ -55,11 +55,11 @@ public class BaseTest {
         accountStep = new AccountStep(driver);
         contactStep = new ContactStep(driver);
         loginStep = new LoginStep(driver);
-//        newAccountModal = new NewAccountModal(driver);
-//        homePage = new HomePage(driver);
+//      newAccountModal = new NewAccountModal(driver);
+//      homePage = new HomePage(driver);
         accountsPage = new AccountsPage(driver);
-//        contactsPage = new ContactsPage(driver);
-//        newContactModal = new NewContactModal(driver);
+        contactsPage = new ContactsPage(driver);
+//      newContactModal = new NewContactModal(driver);
     }
 
     @AfterMethod(alwaysRun = true, description = "Close browser")

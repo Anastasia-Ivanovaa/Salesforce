@@ -1,14 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-@Slf4j
+@Log4j2
 public class LoginPage extends BasePage {
 
     private final By USERNAME_INPUT = By.id("username");
@@ -26,7 +26,6 @@ public class LoginPage extends BasePage {
         } catch (TimeoutException a) {
             log.error(a.getMessage());
             Assert.fail("Login page isn't opened");
-
         }
         return this;
     }
@@ -40,7 +39,7 @@ public class LoginPage extends BasePage {
 
     @Step("Login into app - username:{userName} password:{password}")
     public HomePage login(String userName, String password) {
-        log.info("Log in app using credential '{}' '{}'", userName, password);
+        log.info("Log into application using credentials '{}' '{}'", userName, password);
         driver.findElement(USERNAME_INPUT).sendKeys(userName);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();

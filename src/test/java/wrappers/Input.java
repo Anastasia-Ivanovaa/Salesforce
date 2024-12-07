@@ -1,11 +1,11 @@
 package wrappers;
 
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-@Slf4j
+@Log4j2
 public class Input {
 
     WebDriver driver;
@@ -18,7 +18,7 @@ public class Input {
 
     public void write(String text) {
         log.info("Writing '{}' into {}", text, label);
-                driver.findElement(By.xpath(String.format("//label[text()='%s']//ancestor::lightning-input//input", label)))
+        driver.findElement(By.xpath(String.format("//label[text()='%s']//ancestor::lightning-input//input", label)))
                 .sendKeys(text);
     }
 }
