@@ -1,10 +1,11 @@
 package steps;
 
-import dto.Account;
 import dto.Contact;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
+@Log4j2
 public class ContactStep {
 
     HomePage homePage;
@@ -19,6 +20,7 @@ public class ContactStep {
 
 
     public void create(Contact contact) {
+        log.info("Create a new contact");
         homePage.open()
                 .selectMenuOption("Contacts", ContactsPage.class)
                 .clickOnActionButton("New")

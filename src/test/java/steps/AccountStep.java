@@ -1,11 +1,13 @@
 package steps;
 
 import dto.Account;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import pages.AccountsPage;
 import pages.HomePage;
 import pages.NewAccountModal;
 
+@Log4j2
 public class AccountStep {
 
     HomePage homePage;
@@ -19,6 +21,7 @@ public class AccountStep {
     }
 
     public void create(Account account) {
+        log.info("Create a new account");
         homePage.open()
                 .isPageOpened()
                 .selectMenuOption("Accounts", AccountsPage.class)
