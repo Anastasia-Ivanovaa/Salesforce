@@ -1,10 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
+@Slf4j
 public class LoginPage extends BasePage {
 
     private final By USERNAME_INPUT = By.id("username");
@@ -17,18 +21,26 @@ public class LoginPage extends BasePage {
 
     @Override
     public LoginPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        } catch (TimeoutException a) {
+            log.error(a.getMessage());
+            Assert.fail("Login page isn't opened");
+
+        }
         return this;
     }
 
     @Step("Open Login page")
     public LoginPage open() {
+        log.info("Login page is opened");
         driver.get("https://tms9-dev-ed.develop.my.salesforce.com/");
         return this;
     }
 
     @Step("Login into app - username:{userName} password:{password}")
     public HomePage login(String userName, String password) {
+        log.info("Log in app using credential '{}' '{}'", userName, password);
         driver.findElement(USERNAME_INPUT).sendKeys(userName);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();

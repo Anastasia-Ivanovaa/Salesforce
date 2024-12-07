@@ -2,6 +2,7 @@ package pages;
 
 import dto.Account;
 import io.qameta.allure.Step;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +10,7 @@ import wrappers.Input;
 import wrappers.Picklist;
 import wrappers.Textarea;
 
+@Slf4j
 public class NewAccountModal extends BasePage {
 
     private final String BUTTON_PATTERN =
@@ -34,6 +36,8 @@ public class NewAccountModal extends BasePage {
 
     @Step("Fill New Account form by valid data")
     public NewAccountModal createAccount(Account account) {
+        log.info("Creating account '{}', ", account.getAccountName());
+
         //Account Information
         new Input(driver, "Account Name").write(account.getAccountName());
         new Picklist(driver, "Rating").select(account.getRatingOption());
