@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 @Log4j2
-
 public class ContactsPage extends BasePage {
     private String ACTION_BUTTON_PATTERN =
             "//lightning-button//ancestor::runtime_pipeline_inspector-actions-button-group//button[text()='%s']";
